@@ -1,0 +1,457 @@
+<!-- Save as duplicate.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Narayan's Coding Playground</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #232526 0%, #FFD700 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #181818;
+            max-width: 500px;
+            margin: 40px auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(255,215,0,0.12);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        h1 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px #232526;
+        }
+        h2 {
+            color: #FFD700;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 8px #232526;
+        }
+        .info {
+            color: #FFD700;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            background: #232526;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+        }
+        .start-btn, .back-btn {
+            background: linear-gradient(90deg, #FFD700 0%, #232526 100%);
+            color: #181818;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 12px 0;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.12);
+            transition: background 0.2s, color 0.2s;
+        }
+        .start-btn:hover, .back-btn:hover {
+            background: linear-gradient(90deg, #232526 0%, #FFD700 100%);
+            color: #FFD700;
+        }
+        .question-list {
+            text-align: left;
+            margin-top: 24px;
+        }
+        .question {
+            background: #232526;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+        }
+        .question-title {
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px #181818;
+        }
+        .try-btn, .code-btn {
+            background: #FFD700;
+            color: #181818;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-top: 6px;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .try-btn:hover {
+            background: #181818;
+            color: #FFD700;
+        }
+        .code-btn {
+            background: #232526;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+        .code-btn:hover {
+            background: #FFD700;
+            color: #181818;
+        }
+        .question-area {
+            margin-top: 24px;
+        }
+        .code-area {
+            background: #181818;
+            color: #FFD700;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 18px;
+            font-size: 0.95rem;
+            text-align: left;
+            overflow-x: auto;
+            border: 2px solid #FFD700;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 12px 0;
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #232526;
+            color: #FFD700;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #FFD700;
+            outline: none;
+        }
+        label {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        #result {
+            margin-top: 18px;
+            font-size: 1.1rem;
+            color: #FFD700;
+            min-height: 24px;
+        }
+        .found {
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 0 2px 8px #232526;
+        }
+        .notfound {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <h1>Hey, I am Narayan</h1>
+        <div class="info">
+            BTECH CSE Student<br><br>
+            <strong>Info:</strong> In this website you can see different types of coding questions and try them!
+        </div>
+        <button class="start-btn" onclick="showQuestions()">Start</button>
+    </div>
+
+    <script>
+        // Java code snippets for each question
+        const javaCodes = {
+            duplicate: `
+public class DuplicateFinder {
+    public static void findDuplicates(int arr[]) {
+        int x = arr.length;
+        for (int a = 0; a < x; a++) {
+            for (int b = a + 1; b < x; b++) {
+                if (arr[a] == arr[b]) {
+                    System.out.println("Duplicate element found: " + arr[a]);
+                }
+            }
+        }
+    }
+}
+            `,
+            twosum: `
+public class TwoSum {
+    public static boolean hasTwoSum(int arr[], int target) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] + arr[j] == target) {
+                    System.out.println("Pair found: " + arr[i] + ", " + arr[j]);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+            `,
+            secondLargest: `
+public class SecondLargest {
+    public static int findSecondLargest(int arr[]) {
+        int largest = Integer.MIN_VALUE, second = Integer.MIN_VALUE;
+        for (int num : arr) {
+            if (num > largest) {
+                second = largest;
+                largest = num;
+            } else if (num > second && num != largest) {
+                second = num;
+            }
+        }
+        return second;
+    }
+}
+            `,
+            largest: `
+public class LargestElement {
+    public static int findLargest(int arr[]) {
+        int largest = arr[0];
+        for (int num : arr) {
+            if (num > largest) largest = num;
+        }
+        return largest;
+    }
+}
+            `,
+            primeChecker: `
+public class PrimeChecker {
+    public static void checkPrimes(int arr[]) {
+        for (int num : arr) {
+            if (isPrime(num)) {
+                System.out.println(num + " is prime");
+            }
+        }
+    }
+    private static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
+            `
+        };
+
+        function showHome() {
+            document.getElementById('main-container').innerHTML = `
+                <h1>Hey, I am Narayan</h1>
+                <div class="info">
+                    BTECH CSE Student<br><br>
+                    <strong>Info:</strong> In this website you can see different types of coding questions and try them!
+                </div>
+                <button class="start-btn" onclick="showQuestions()">Start</button>
+            `;
+        }
+
+        function showQuestions() {
+            const container = document.getElementById('main-container');
+            container.innerHTML = `
+                <h1>Select a Coding Question</h1>
+                <div class="question-list">
+                    <div class="question">
+                        <div class="question-title">Duplicate Finder</div>
+                        <button class="try-btn" onclick="showTry('duplicate')">Try</button>
+                        <button class="code-btn" onclick="showCode('duplicate')">Show Java Code</button>
+                    </div>
+                    <div class="question">
+                        <div class="question-title">Two Sum Question</div>
+                        <button class="try-btn" onclick="showTry('twosum')">Try</button>
+                        <button class="code-btn" onclick="showCode('twosum')">Show Java Code</button>
+                    </div>
+                    <div class="question">
+                        <div class="question-title">Find 2nd Largest Element</div>
+                        <button class="try-btn" onclick="showTry('secondLargest')">Try</button>
+                        <button class="code-btn" onclick="showCode('secondLargest')">Show Java Code</button>
+                    </div>
+                    <div class="question">
+                        <div class="question-title">Find Largest Element</div>
+                        <button class="try-btn" onclick="showTry('largest')">Try</button>
+                        <button class="code-btn" onclick="showCode('largest')">Show Java Code</button>
+                    </div>
+                    <div class="question">
+                        <div class="question-title">Prime Number Checker in Array</div>
+                        <button class="try-btn" onclick="showTry('primeChecker')">Try</button>
+                        <button class="code-btn" onclick="showCode('primeChecker')">Show Java Code</button>
+                    </div>
+                </div>
+                <button class="back-btn" onclick="showHome()">Back to Home</button>
+            `;
+        }
+
+        function showTry(type) {
+            let html = `<button class="back-btn" onclick="showQuestions()">Back to Questions</button>`;
+            if (type === 'duplicate') {
+                html += `
+                    <div class="question-area">
+                        <h2>Duplicate Finder</h2>
+                        <label>Enter numbers separated by commas:</label><br>
+                        <input type="text" id="arrayInput" placeholder="e.g. 1,2,3,2,5,5,6">
+                        <br>
+                        <button class="try-btn" onclick="findDuplicates()">Find Duplicates</button>
+                        <div id="result"></div>
+                    </div>
+                `;
+            } else if (type === 'twosum') {
+                html += `
+                    <div class="question-area">
+                        <h2>Two Sum Question</h2>
+                        <label>Enter numbers separated by commas:</label><br>
+                        <input type="text" id="arrayInput" placeholder="e.g. 1,2,3,4,5">
+                        <br>
+                        <label>Enter target sum:</label><br>
+                        <input type="text" id="targetInput" placeholder="e.g. 7">
+                        <br>
+                        <button class="try-btn" onclick="findTwoSum()">Find Pair</button>
+                        <div id="result"></div>
+                    </div>
+                `;
+            } else if (type === 'secondLargest') {
+                html += `
+                    <div class="question-area">
+                        <h2>Find 2nd Largest Element</h2>
+                        <label>Enter numbers separated by commas:</label><br>
+                        <input type="text" id="arrayInput" placeholder="e.g. 1,2,3,4,5">
+                        <br>
+                        <button class="try-btn" onclick="findSecondLargest()">Find 2nd Largest</button>
+                        <div id="result"></div>
+                    </div>
+                `;
+            } else if (type === 'largest') {
+                html += `
+                    <div class="question-area">
+                        <h2>Find Largest Element</h2>
+                        <label>Enter numbers separated by commas:</label><br>
+                        <input type="text" id="arrayInput" placeholder="e.g. 1,2,3,4,5">
+                        <br>
+                        <button class="try-btn" onclick="findLargest()">Find Largest</button>
+                        <div id="result"></div>
+                    </div>
+                `;
+            } else if (type === 'primeChecker') {
+                html += `
+                    <div class="question-area">
+                        <h2>Prime Number Checker in Array</h2>
+                        <label>Enter numbers separated by commas:</label><br>
+                        <input type="text" id="arrayInput" placeholder="e.g. 1,2,3,4,5">
+                        <br>
+                        <button class="try-btn" onclick="checkPrimes()">Check Primes</button>
+                        <div id="result"></div>
+                    </div>
+                `;
+            }
+            document.getElementById('main-container').innerHTML = html;
+        }
+
+        function showCode(type) {
+            document.getElementById('main-container').innerHTML = `
+                <button class="back-btn" onclick="showQuestions()">Back to Questions</button>
+                <div class="code-area"><pre>${javaCodes[type]}</pre></div>
+            `;
+        }
+
+        // JS logic for each question
+        function findDuplicates() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+            const duplicates = [];
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[i] === arr[j] && !duplicates.includes(arr[i])) {
+                        duplicates.push(arr[i]);
+                    }
+                }
+            }
+            const resultDiv = document.getElementById('result');
+            if (duplicates.length > 0) {
+                resultDiv.innerHTML = `<span class="found">Duplicate elements found: ${duplicates.join(', ')}</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class="notfound">No duplicates found.</span>`;
+            }
+        }
+
+        function findTwoSum() {
+            const input = document.getElementById('arrayInput').value;
+            const target = Number(document.getElementById('targetInput').value);
+            const arr = input.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+            let found = false;
+            let pair = '';
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[i] + arr[j] === target) {
+                        found = true;
+                        pair = arr[i] + ', ' + arr[j];
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            const resultDiv = document.getElementById('result');
+            if (found) {
+                resultDiv.innerHTML = `<span class="found">Pair found: ${pair}</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class="notfound">No pair found for target ${target}.</span>`;
+            }
+        }
+
+        function findSecondLargest() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+            let largest = -Infinity, second = -Infinity;
+            for (let num of arr) {
+                if (num > largest) {
+                    second = largest;
+                    largest = num;
+                } else if (num > second && num !== largest) {
+                    second = num;
+                }
+            }
+            const resultDiv = document.getElementById('result');
+            if (arr.length < 2 || second === -Infinity) {
+                resultDiv.innerHTML = `<span class="notfound">No second largest element found.</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class="found">Second largest element: ${second}</span>`;
+            }
+        }
+
+        function findLargest() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+            let largest = -Infinity;
+            for (let num of arr) {
+                if (num > largest) largest = num;
+            }
+            const resultDiv = document.getElementById('result');
+            if (arr.length === 0) {
+                resultDiv.innerHTML = `<span class="notfound">No elements in array.</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class="found">Largest element: ${largest}</span>`;
+            }
+        }
+
+        function checkPrimes() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+            const primes = arr.filter(isPrime);
+            const resultDiv = document.getElementById('result');
+            if (primes.length > 0) {
+                resultDiv.innerHTML = `<span class="found">Prime numbers: ${primes.join(', ')}</span>`;
+            } else {
+                resultDiv.innerHTML = `<span class="notfound">No prime numbers found.</span>`;
+            }
+        }
+        function isPrime(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
